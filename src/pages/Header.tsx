@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 
+import Carousel from "./components/Carousel";
 import Search from "./components/Search";
 import Select from "./components/Select";
 
@@ -26,7 +27,7 @@ const Header = () => {
 				>
 					Staem
 				</Typography>
-				{/* image carousel */}
+
 				<Button
 					variant="contained"
 					style={{
@@ -36,6 +37,9 @@ const Header = () => {
 				>
 					install
 				</Button>
+			</Box>
+			<Box>
+				<Carousel />
 			</Box>
 			<Box
 				sx={{
