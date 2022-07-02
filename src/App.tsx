@@ -1,31 +1,18 @@
-import { Grid } from '@mui/material';
-import './App.css'
-import Main from './pages/Main'
+import "./App.css";
+
+import { Container } from "@mui/material";
+import Header from "./pages/Header";
+import Item from "./pages/components/Item";
 
 function App() {
-
-  return (
-      <div className="App">
-          <h1>Staem</h1>
-          {/* image carousle */}
-
-          <Grid container spacing={2}>
-              <input type="text" placeholder="Search" />
-              <p>Sort by:</p>
-              <select>
-                  <option value="">Price</option>
-                  <option value="">Newest</option>
-                  <option value="">Oldest</option>
-                  <option value="">Most Liked</option>
-                  <option value="">Most Commented</option>
-              </select>
-              <h2>New & Trending</h2>
-
-              <h2>Popular</h2>
-          </Grid>
-          <Main />
-      </div>
-  );
+	return (
+		<Container style={{ marginTop: "30px" }}>
+			<Header />
+			<Item />
+			<Item />
+			<Item />
+		</Container>
+	);
 }
 
-export default App
+export default App;

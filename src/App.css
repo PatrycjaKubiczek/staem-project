@@ -1,4 +1,28 @@
-#root {
-    height: 100vh;
-    background-color: #1B2837;
+html,
+body {
+	background-color: #1b2837;
+}
+
+h1 {
+	color: white;
+}
+.title-line {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	left: -160px;
+}
+.title-line:before,
+.title-line:after {
+	content: "";
+	flex: 1 1;
+	border-bottom: 10px solid #214b6b;
+	margin: auto;
+	border-radius: 20px;
+}
+.title-line:before {
+	margin-right: 10px;
+}
+.title-line:after {
+	margin-left: 10px;
 }
