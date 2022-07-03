@@ -1,12 +1,10 @@
 import { Box, Button, Typography } from "@mui/material";
 
-import Carousel from "./components/Carousel";
-import Search from "./components/Search";
-import Select from "./components/Select";
+import Carousel from "./Carousel";
 
 const Header = () => {
 	return (
-		<Box>
+		<Box className="header">
 			<Box
 				sx={{
 					display: "flex",
@@ -56,34 +54,12 @@ const Header = () => {
 					style={{
 						color: "white",
 						width: "500px",
-						marginRight: "-100px;",
+						marginRight: "-100px",
 					}}
 					className="title-line"
 				>
 					New & Trending
 				</Typography>
-			</Box>
-			<Box
-				sx={{
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center",
-					flexDirection: "row",
-				}}
-			>
-				<Search />
-
-				<Box
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-						alignItems: "center",
-						flexDirection: "row",
-					}}
-				>
-					<p>Sort by:</p>
-					<Select />
-				</Box>
 			</Box>
 		</Box>
 	);

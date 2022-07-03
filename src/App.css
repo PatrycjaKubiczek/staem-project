@@ -1,8 +1,16 @@
 html,
 body {
-	background-color: #1b2837;
+	/* background: rgb(26, 58, 83); */
+	background: rgba(27, 40, 55, 1) 55%;
 }
-
+.header {
+	background: rgb(26, 58, 83);
+	background: radial-gradient(
+		circle,
+		rgba(26, 58, 83, 1) 0%,
+		rgba(27, 40, 55, 1) 55%
+	);
+}
 h1 {
 	color: white;
 }

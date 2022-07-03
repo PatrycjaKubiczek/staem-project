@@ -1,7 +1,6 @@
 import "swiper/css";
 
 // Import Swiper styles
-import { Swiper, SwiperOptions } from "swiper";
 import SwiperCore, { EffectCoverflow, Pagination } from "swiper";
 import { Swiper as SwiperReact, SwiperSlide } from "swiper/react";
 
@@ -11,10 +10,10 @@ export default function SwiperCoverflow() {
 	return (
 		<SwiperReact
 			pagination={{ clickable: true }}
-			spaceBetween={0}
+			spaceBetween={100}
 			slidesPerView={3}
 			onSlideChange={() => console.log("slide change")}
-			onSwiper={(swiper: any) => console.log(swiper)}
+			onSwiper={(swiper: any) => console.log("")}
 			style={{ height: "500px", margin: "100px 0" }}
 			effect="coverflow"
 			coverflowEffect={{
@@ -24,6 +23,7 @@ export default function SwiperCoverflow() {
 				depth: 100,
 			}}
 		>
+			{/* todo change to url games */}
 			<SwiperSlide
 				style={{
 					backgroundImage:
