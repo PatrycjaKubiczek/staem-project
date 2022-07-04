@@ -1,12 +1,8 @@
 import {
 	Box,
 	Divider,
-	FormControl,
 	Grid,
-	InputLabel,
 	Link,
-	MenuItem,
-	Select,
 	SelectChangeEvent,
 	Typography,
 	styled,
@@ -17,10 +13,8 @@ import { useEffect, useState } from "react";
 import CustomSelect from "./CustomSelect";
 import { GameProps } from "../../types/Games";
 import Loader from "./Loader";
-import MyCustomSelect from "./MyCustomSelect";
 import Paper from "@mui/material/Paper";
 import Search from "./Search";
-// import Select from "./Select";
 import { createClient } from "@supabase/supabase-js";
 
 //styles
