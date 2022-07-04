@@ -1,11 +1,26 @@
-import { Box, Divider, Grid, Link, Typography, styled } from "@mui/material";
+import {
+	Box,
+	Divider,
+	FormControl,
+	Grid,
+	InputLabel,
+	Link,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
+	Typography,
+	styled,
+} from "@mui/material";
 import { SUPABASE_APIKEY, SUPABASE_AUTHKEY, SUPABASE_URL } from "../../api";
 import { useEffect, useState } from "react";
 
+import CustomSelect from "./CustomSelect";
 import { GameProps } from "../../types/Games";
+import Loader from "./Loader";
+import MyCustomSelect from "./MyCustomSelect";
 import Paper from "@mui/material/Paper";
 import Search from "./Search";
-import Select from "./Select";
+// import Select from "./Select";
 import { createClient } from "@supabase/supabase-js";
 
 //styles
@@ -34,6 +49,7 @@ const GameList = () => {
 	const [games, setGames] = useState<IGames>([]);
 	const [loading, setLoading] = useState(true);
 	const [searchValue, setSearchValue] = useState("");
+	const [filterValue, setFilterValue] = useState("");
 
 	const fetchSteamData = async () => {
 		setLoading(true);
@@ -44,18 +60,44 @@ const GameList = () => {
 		if (error) {
 			console.error(error);
 		}
+		filterGames(data);
 		setGames(data);
 		setLoading(false);
 	};
 
 	useEffect(() => {
 		fetchSteamData();
-	}, []);
+	}, [filterValue]);
 
 	const onSearchQueryChange = (
 		e: React.ChangeEvent<HTMLInputElement>
 	): void => {
 		setSearchValue(e.currentTarget.value);
+	};
+
+	const sortByPrice = (games: any[]) => {
+		let sortedGamesByPrice = games.sort((a, b) => a.price - b.price);
+	};
+
+	const sortByName = (games: any[]) => {
+		let sortedGamesByTitle = games.sort((a, b) =>
+			a.title.localeCompare(b.title)
+		);
+		return sortedGamesByTitle;
+	};
+
+	const handleSelectChange = (event: SelectChangeEvent) => {
+		setFilterValue(event.target.value as string);
+	};
+
+	const filterGames = (games: IGames) => {
+		if (filterValue === "price") {
+			sortByPrice(games);
+		} else if (filterValue === "name") {
+			sortByName(games);
+		} else {
+			return games;
+		}
 	};
 
 	return (
@@ -79,11 +121,14 @@ const GameList = () => {
 					}}
 				>
 					<p style={{ color: "white" }}>Sort by:</p>
-					<Select />
+					<CustomSelect
+						onChange={handleSelectChange}
+						filteredValue={filterValue}
+					/>
 				</Box>
 			</Box>
 			{games.length === 0 && loading ? (
-				<p>loading...</p>
+				<Loader />
 			) : (
 				games
 					.filter((game: any) => {

@@ -1,6 +1,5 @@
 import InputUnstyled from "@mui/base/InputUnstyled";
 import { styled } from "@mui/material";
-import { useState } from "react";
 
 const SearchBox = styled(InputUnstyled)({
 	"& input": {
@@ -9,6 +8,8 @@ const SearchBox = styled(InputUnstyled)({
 		color: "white",
 		padding: "10px",
 		border: "1px solid transparent",
+		width: "273px",
+		minHeight: "31px",
 		"&:hover": {
 			background: "#214b6b",
 		},
@@ -24,7 +25,7 @@ const SearchBox = styled(InputUnstyled)({
 });
 
 const Search = (props: any) => {
-	const { searchQuery, onChange, search } = props;
+	const { searchQuery, onChange } = props;
 
 	return (
 		<SearchBox
