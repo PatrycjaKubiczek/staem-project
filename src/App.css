@@ -70,3 +70,11 @@ h1 {
 		transform: rotate(360deg);
 	}
 }
+
+.swiper-slide:not(.swiper-slide-next) {
+	transition: filter 0.3s ease-in-out;
+	filter: brightness(20%);
+}
+.swiper-slide {
+	border-radius: 2em;
+}

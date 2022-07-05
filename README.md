@@ -10,5 +10,5 @@ tools:
 
 //todo
 
--   finish carousel in header
 -   add tests
+-   infinite scroll
