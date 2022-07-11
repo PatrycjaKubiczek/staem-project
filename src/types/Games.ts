@@ -1,4 +1,4 @@
-export interface GameProps {
+export interface IGame {
     genre: string
 	id: string;
     image: string;

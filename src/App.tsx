@@ -1,6 +1,5 @@
 import "./App.css";
 
-import { Container } from "@mui/material";
 import GameList from "./pages/GameList";
 import Header from "./components/Header";
 

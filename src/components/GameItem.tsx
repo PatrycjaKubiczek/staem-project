@@ -8,7 +8,7 @@ import {
 	styled,
 } from "@mui/material";
 
-import { GameProps } from "../types/Games";
+import { IGame } from "../types/Games";
 
 //styles
 const StyledPaper = styled(Paper)({
@@ -23,7 +23,7 @@ const StyledPaper = styled(Paper)({
 	},
 });
 
-const GameItem = ({ link, id, title, genre, image, price }: GameProps) => {
+const GameItem = ({ link, id, title, genre, image, price }: IGame) => {
 	return (
 		<Link href={link} key={`game_${id}`} underline="none">
 			<StyledPaper

@@ -1,12 +1,12 @@
 import { Box, Container, SelectChangeEvent } from "@mui/material";
 import { SUPABASE_APIKEY, SUPABASE_AUTHKEY, SUPABASE_URL } from "../api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Carousel from "../components/Carousel";
 import CustomSelect from "../components/CustomSelect";
 import GameItem from "../components/GameItem";
-import { GameProps } from "../types/Games";
 import Heading from "../components/Heading";
+import { IGame } from "../types/Games";
 import Loader from "../components/Loader";
 import Menu from "../components/Menu";
 import Search from "../components/Search";
@@ -19,35 +19,54 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_APIKEY, {
 });
 
 const GameList = () => {
-	type IGames = any;
+	type IGames = IGame[];
 
-	const [games, setGames] = useState<IGames>([]);
-	const [carouselGames, setCarouselGames] = useState<IGames>([]);
+	const [games, setGames] = useState<IGames | null>([]);
+	const [carouselGames, setCarouselGames] = useState<IGames | null>([]);
 	const [loading, setLoading] = useState(true);
 	const [searchValue, setSearchValue] = useState("");
 	const [filterValue, setFilterValue] = useState("");
+	const [limit, setLimit] = useState(30);
+	const loader = useRef(null);
 
 	const fetchSteamData = async () => {
 		setLoading(true);
 		const { data, error } = await supabase
 			.from("steam")
 			.select("*")
-			.limit(30);
+			.limit(limit);
 		if (error) {
 			console.error(error);
 		}
 		filterGames(data);
-		if (carouselGames.length === 0) {
+		if (carouselGames?.length === 0) {
 			setCarouselGames(data);
 		}
 
 		setGames(data);
+
 		setLoading(false);
 	};
 
 	useEffect(() => {
 		fetchSteamData();
-	}, [filterValue]);
+	}, [filterValue, limit]);
+
+	const handleObserver = (entries: any) => {
+		if (entries[0].isIntersecting) {
+			setLimit((prev) => prev + 10);
+		}
+	};
+
+	useEffect(() => {
+		const option = {
+			root: null,
+			rootMargin: "20px",
+			threshold: 0,
+		};
+		const observer = new IntersectionObserver(handleObserver, option);
+		if (loader.current) observer.observe(loader.current);
+	}, [handleObserver]);
 
 	const onSearchQueryChange = (
 		e: React.ChangeEvent<HTMLInputElement>
@@ -71,13 +90,15 @@ const GameList = () => {
 		setFilterValue(event.target.value as string);
 	};
 
-	const filterGames = (games: IGames) => {
-		if (filterValue === "price") {
-			sortByPrice(games);
-		} else if (filterValue === "name") {
-			sortByName(games);
-		} else {
-			return games;
+	const filterGames = (games: IGame[] | null) => {
+		if (games) {
+			if (filterValue === "price") {
+				sortByPrice(games);
+			} else if (filterValue === "name") {
+				sortByName(games);
+			} else {
+				return games;
+			}
 		}
 	};
 
@@ -125,11 +146,11 @@ const GameList = () => {
 						/>
 					</Box>
 				</Box>
-				{games.length === 0 && loading ? (
+				{games?.length === 0 && loading ? (
 					<Loader />
 				) : (
 					games
-						.filter((game: any) => {
+						?.filter((game: any) => {
 							if (searchValue === "") {
 								return game;
 							} else if (
@@ -150,7 +171,7 @@ const GameList = () => {
 								link,
 								platforms,
 								tags,
-							}: GameProps) => (
+							}: IGame) => (
 								<GameItem
 									key={id}
 									id={id}
@@ -164,6 +185,11 @@ const GameList = () => {
 								/>
 							)
 						)
+				)}
+				{!loading && (
+					<div ref={loader} style={{ padding: "50px 0" }}>
+						<Loader />
+					</div>
 				)}
 			</Container>
 		</>
