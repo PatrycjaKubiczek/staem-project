@@ -185,15 +185,17 @@ const GameList = () => {
 						<Loader />
 					</div>
 				) : (
-					<p
-						style={{
-							color: "white",
-							textAlign: "center",
-							margin: "50px 0",
-						}}
-					>
-						no results found
-					</p>
+					searchValue && (
+						<p
+							style={{
+								color: "white",
+								textAlign: "center",
+								margin: "50px 0",
+							}}
+						>
+							no results found
+						</p>
+					)
 				)}
 			</Container>
 		</>
