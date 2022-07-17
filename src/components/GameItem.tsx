@@ -40,7 +40,8 @@ const GameItem = ({ link, id, title, genre, image, price }: IGame) => {
 				<Grid container>
 					<Grid
 						item
-						xs={6}
+						xs={12}
+						sm={6}
 						style={{
 							backgroundImage: `url(${image})`,
 							borderTopLeftRadius: "15px",
@@ -51,7 +52,7 @@ const GameItem = ({ link, id, title, genre, image, price }: IGame) => {
 							height: "245px",
 						}}
 					></Grid>
-					<Grid item xs={6}>
+					<Grid item xs={12} sm={6}>
 						<Box
 							style={{
 								boxSizing: "border-box",

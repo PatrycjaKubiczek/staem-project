@@ -78,3 +78,23 @@ h1 {
 .swiper-slide {
 	border-radius: 2em;
 }
+
+.swiper {
+	height: 300px;
+	margin: 100px 0;
+}
+
+/* @media screen and (min-width: 640px) {
+	.swiper-container {
+	  width: 640px;
+	}
+  } */
+
+@media screen and (max-width: 991px) {
+	.swiper {
+		margin: 30px;
+	}
+	.swiper-slide {
+		filter: brightness(100%) !important;
+	}
+}

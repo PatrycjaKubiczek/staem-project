@@ -8,7 +8,7 @@ const SearchBox = styled(InputUnstyled)({
 		color: "white",
 		padding: "10px",
 		border: "1px solid transparent",
-		width: "273px",
+		width: "203px",
 		minHeight: "31px",
 		"&:hover": {
 			background: "#214b6b",
@@ -17,6 +17,9 @@ const SearchBox = styled(InputUnstyled)({
 		"&:focus-visible": {
 			outline: 0,
 			border: "1px solid #214b6b",
+		},
+		"@media screen and (max-width: 768px)": {
+			marginBottom: "20px",
 		},
 	},
 	"& ::placeholder": {
@@ -29,7 +32,7 @@ const Search = (props: any) => {
 
 	return (
 		<SearchBox
-			id="standard-basic"
+			id="search-bar"
 			placeholder="Search"
 			color="primary"
 			value={searchQuery}

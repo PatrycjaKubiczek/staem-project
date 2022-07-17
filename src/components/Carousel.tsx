@@ -12,9 +12,6 @@ export default function SwiperCoverflow({ games }: any) {
 			pagination={{ clickable: true }}
 			spaceBetween={20}
 			slidesPerView={3}
-			onSlideChange={() => console.log("slide change")}
-			onSwiper={(swiper: any) => console.log("")}
-			style={{ height: "300px", margin: "100px 0" }}
 			effect="coverflow"
 			coverflowEffect={{
 				rotate: 0,

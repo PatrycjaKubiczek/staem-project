@@ -1,4 +1,4 @@
-import { Box, Container, SelectChangeEvent } from "@mui/material";
+import { Box, Container, Grid, SelectChangeEvent } from "@mui/material";
 import { SUPABASE_APIKEY, SUPABASE_AUTHKEY, SUPABASE_URL } from "../api";
 import { useEffect, useRef, useState } from "react";
 
@@ -110,7 +110,7 @@ const GameList = () => {
 					<Carousel games={carouselGames} />
 				</Box>
 			</Box>
-			<Container>
+			<Container maxWidth="lg">
 				<Box
 					sx={{
 						display: "flex",
@@ -121,32 +121,26 @@ const GameList = () => {
 				>
 					<Heading>New & Trending</Heading>
 				</Box>
-				<Box
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-						alignItems: "center",
-						flexDirection: "row",
-					}}
-				>
-					<Search onChange={onSearchQueryChange} />
-
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "center",
-							flexDirection: "row",
-						}}
+				<Grid container>
+					<Grid item xs={12} md={6}>
+						<Search onChange={onSearchQueryChange} />
+					</Grid>
+					<Grid
+						item
+						xs={12}
+						md={6}
+						style={{ flexWrap: "nowrap", display: "flex" }}
 					>
-						<p style={{ color: "white" }}>Sort by:</p>
+						<p style={{ color: "white", minWidth: "75px" }}>
+							Sort by:
+						</p>
 						<CustomSelect
 							onChange={handleSelectChange}
 							filteredValue={filterValue}
 						/>
-					</Box>
-				</Box>
-				{games?.length === 0 && loading ? (
+					</Grid>
+				</Grid>
+				{games?.length === 0 && loading && !searchValue ? (
 					<Loader />
 				) : (
 					games
@@ -186,10 +180,20 @@ const GameList = () => {
 							)
 						)
 				)}
-				{!loading && (
+				{!loading && !searchValue ? (
 					<div ref={loader} style={{ padding: "50px 0" }}>
 						<Loader />
 					</div>
+				) : (
+					<p
+						style={{
+							color: "white",
+							textAlign: "center",
+							margin: "50px 0",
+						}}
+					>
+						no results found
+					</p>
 				)}
 			</Container>
 		</>
